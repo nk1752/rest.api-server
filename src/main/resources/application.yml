@@ -1,0 +1,15 @@
+server: 
+  port: 8080
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # ** appdir userpool **
+          issuer-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_00c1918jH
+          jwk-set-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_00c1918jH/.well-known/jwks.json
+
+          # ** authenticatorapp-staging **
+          #issuer-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_nmsaTKsGq
+          #jwk-set-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_nmsaTKsGq/.well-known/jwks.json

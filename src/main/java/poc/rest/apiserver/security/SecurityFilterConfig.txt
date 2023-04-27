@@ -1,0 +1,32 @@
+package poc.rest.apiserver.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+
+@Configuration
+@EnableWebSecurity
+public class SecurityFilterConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        return http
+            .authorizeHttpRequests(auth -> {
+                auth.requestMatchers("/health").permitAll();
+                auth.requestMatchers("/api/**").authenticated();
+                //auth.requestMatchers("/api/**").hasRole("ADMIN");
+                //auth.anyRequest().authenticated();
+            })
+            .csrf(csrf -> csrf.disable())
+            .httpBasic(basic -> {})
+
+            .oauth2ResourceServer(oauth -> {})
+            
+            .build();   
+    }
+    
+}
