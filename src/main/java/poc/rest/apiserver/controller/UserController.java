@@ -21,7 +21,7 @@ public class UserController {
 
     @RequestMapping("/health")
     public String sayHello() {
-        return "I am Okay";
+        return "Resource Server up and running";
     }
 
     @RequestMapping(
@@ -98,12 +98,16 @@ public class UserController {
     }
 
     @RequestMapping(method=RequestMethod.POST, value="/api/user")
-    public void addCustomer(@RequestBody User user) {
+    public User addUser(@RequestBody User user) {
 
         //Customer customer = new Customer(id, firstName, lastName, accountId);
+
+        String str = "Testing...  full name";
+        System.out.println(str);
+
         userService.addUser(user);
 
-        //return customer;
+        return user;
 
     }
     

@@ -16,5 +16,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
     List<User> findByAccountId(Integer id);
 
     List<User> findByIdBetween(Long id1, Long id2);
+
+    
     
 }

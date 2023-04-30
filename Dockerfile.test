@@ -1,0 +1,47 @@
+FROM openjdk:20-alpine
+
+# set timezone in docker container
+ENV TZ=America/Chicago
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Add a new group "viva-non-root-group" with group id 1001 
+RUN addgroup -S -g 1001 viva
+# Add a new user "viva-non-root-user" with user id 1001 and include in group
+RUN adduser -S -u 1001 -G viva devops
+# set current user
+USER 1001
+
+EXPOSE 8080
+
+# ADD
+# COPY
+# ENV
+# EXPOSE
+# FROM
+# LABEL
+# STOPSIGNAL
+# USER
+# VOLUME
+# WORKDIR
+# ONBUILD
+
+# configure ARG with --build-arg jar=
+# ARG project
+# ARG branch
+# ARG commit
+# ARG job
+# ARG build
+# ARG date
+ARG jar
+
+# LABEL project=$project
+# LABEL branch=$branch
+# LABEL commit=$commit
+# LABEL job=$job
+# LABEL build=$build
+# LABEL date=$date
+
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} restapiserver.jar
+# ENTRYPOINT ["java","-jar","/nk-poc.jar"]
+ENTRYPOINT exec java -jar /restapiserver.jar
