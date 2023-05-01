@@ -1,10 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: api-ingress
+  name: restapi-ingress
   labels:
-    name: api-ingress
-  namespace: default
+    name: restapi-ingress
+  namespace: rest-api-namespace
   annotations:
     kubernetes.io/ingress.class: azure/application-gateway
     appgw.ingress.kubernetes.io/health-probe-path: /health
@@ -19,14 +19,14 @@ spec:
         path: "/api"
         backend:
           service:
-            name: apiserver-service
+            name: restapiserver-service
             port: 
               number: 8080
       - pathType: Exact
         path: "/status"
         backend:
           service:
-            name: apiserver-service
+            name: restapiserver-service
             port: 
               number: 8080
       

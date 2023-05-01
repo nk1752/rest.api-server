@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: apiserver-deployment
-  namespace: default
+  namespace: rest-api-namespace
   labels:
-    app: apiserver
+    app: restapiserver
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: apiserver
+      app: restapiserver
   template:
     metadata:
       labels:
-        app: apiserver
+        app: restapiserver
     spec:
       containers:
-      - name: apiserver
-        image: vhacr.azurecr.io/apiserver:latest
+      - name: restapiserver
+        image: vhacr.azurecr.io/restapiserver:latest
         resources:
           requests:
             memory: "128Mi"
@@ -27,4 +27,4 @@ spec:
               cpu: "1000m"
         ports:
         - containerPort: 8080
-          name: apiserver-port
+          name: restapiserver-port
