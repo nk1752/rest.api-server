@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: restapiserver
-        image: vhacr.azurecr.io/restapiserver:latest
+        image: acrworkflow1682955432389.azurecr.io/image-workflow-1682955432389:latest
         resources:
           requests:
             memory: "128Mi"
