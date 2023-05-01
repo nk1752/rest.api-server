@@ -31,7 +31,8 @@ name: Build and deploy an app to AKS
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
 env:
@@ -39,8 +40,11 @@ env:
   CONTAINER_NAME: restapiserver
   RESOURCE_GROUP: cluster-dev-rg
   CLUSTER_NAME: cluster-dev
-  DEPLOYMENT_MANIFEST_PATH: manifest
-
+  DEPLOYMENT_MANIFEST_PATH: |
+      ./manifest/api-namespace.yml
+      ./manifest/api-basic-ingress.yml
+      ./manifest/api-deployment.yml
+      ./manifest/api-service.yml
 jobs:
   buildImage:
     permissions:

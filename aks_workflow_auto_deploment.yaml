@@ -11,6 +11,7 @@ env:
     CLUSTER_RESOURCE_GROUP: cluster-dev-rg
     CONTAINER_NAME: image-workflow-1682955432389
     DEPLOYMENT_MANIFEST_PATH: |
+        
         ./manifest/api-basic-ingress.yml
         ./manifest/api-deployment.yml
         ./manifest/api-service.yml
