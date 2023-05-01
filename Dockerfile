@@ -5,7 +5,7 @@ ENV TZ=America/Chicago
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN addgroup -S viva && adduser -S devops -G viva
-USER devops:viva
+USER viva:devops
 
 EXPOSE 8080
 
@@ -20,7 +20,6 @@ EXPOSE 8080
 # VOLUME
 # WORKDIR
 # ONBUILD
-
 # configure ARG with --build-arg jar=
 # ARG project
 # ARG branch
