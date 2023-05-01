@@ -1,4 +1,4 @@
-FROM openjdk:20-alpine
+FROM openjdk:17-alpine
 
 # set timezone in docker container
 ENV TZ=America/Chicago
