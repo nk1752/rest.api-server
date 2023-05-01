@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apiserver-deployment
+  namespace: default
+  labels:
+    app: apiserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apiserver
+  template:
+    metadata:
+      labels:
+        app: apiserver
+    spec:
+      containers:
+      - name: apiserver
+        image: vhacr.azurecr.io/apiserver:latest
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+              memory: "256Mi"
+              cpu: "1000m"
+        ports:
+        - containerPort: 8080
+          name: apiserver-port
