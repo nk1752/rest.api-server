@@ -36,9 +36,14 @@ EXPOSE 8080
 # LABEL build=$build
 # LABEL date=$date
 
-RUN pwd
+# WORKDIR /the/workdir/path
+
+RUN ls
+
 ARG JAR_FILE=target/*.jar
 RUN echo jar file: ${JAR_FILE}
+
 COPY ${JAR_FILE} restapiserver.jar
+
 # ENTRYPOINT ["java","-jar","/nk-poc.jar"]
 ENTRYPOINT exec java -jar /restapiserver.jar
