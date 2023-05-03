@@ -46,4 +46,4 @@ RUN echo jar file: ${JAR_FILE}
 COPY ${JAR_FILE} rest-api-server.jar
 
 # ENTRYPOINT ["java","-jar","/nk-poc.jar"]
-ENTRYPOINT exec java -jar /restapiserver.jar
+ENTRYPOINT exec java -jar /rest-api-server.jar
