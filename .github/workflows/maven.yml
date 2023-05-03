@@ -42,7 +42,8 @@ jobs:
       # run: mvn -B package --file pom.xml -DskipTests
 
     - name: make target directory
-      run: mkdir target && cp target/*.jar target
+      # run: mkdir target && cp target/*.jar target
+      run: pwd
 
   build_image:
     runs-on: ubuntu-latest
@@ -65,12 +66,6 @@ jobs:
 
       - name: build and push image to ACR
         run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
-
-      - name: check
-        run: echo hello checks
-
-      - name: ls
-        run: ls
         
           
 
