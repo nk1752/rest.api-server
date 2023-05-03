@@ -27,7 +27,7 @@ EXPOSE 8080
 # ARG job
 # ARG build
 # ARG date
-# ARG jar
+ARG JAR_FILE
 
 # LABEL project=$project
 # LABEL branch=$branch
@@ -40,10 +40,10 @@ EXPOSE 8080
 
 RUN ls
 
-ARG JAR_FILE=target/*.jar
+# ARG JAR_FILE=target/*.jar
 RUN echo jar file: ${JAR_FILE}
 
-COPY ${JAR_FILE} restapiserver.jar
+COPY ${JAR_FILE} rest-api-server.jar
 
 # ENTRYPOINT ["java","-jar","/nk-poc.jar"]
 ENTRYPOINT exec java -jar /restapiserver.jar
