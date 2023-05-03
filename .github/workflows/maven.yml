@@ -41,9 +41,9 @@ jobs:
       run: mvn clean install --file pom.xml
       # run: mvn -B package --file pom.xml -DskipTests
 
-    - name: copy
+    # - name: copy
       # run: mkdir target && cp target/*.jar target
-      run: cp -R ${{ github.workspace }}/target/*.jar /target
+      # run: cp -R ${{ github.workspace }}/target/*.jar /target
     
     - name: root dir
       run: ls
