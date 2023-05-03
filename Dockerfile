@@ -5,7 +5,7 @@ ENV TZ=America/Chicago
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN addgroup -S viva && adduser -S devops -G viva
-USER viva:devops
+USER devops
 
 EXPOSE 8080
 
