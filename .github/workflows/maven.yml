@@ -63,8 +63,8 @@ jobs:
       - name: build and push image to ACR
         run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
 
-      - name: pwd
-        run: pwd
+      - name: check
+        run: echo hello checks
 
       - name: ls
         run: ls
