@@ -41,6 +41,9 @@ jobs:
       run: mvn -B package --file pom.xml
       # run: mvn -B package --file pom.xml -DskipTests
 
+    - name: make target directory
+      run: mkdir target && cp target/*.jar target
+
   build_image:
     runs-on: ubuntu-latest
 
