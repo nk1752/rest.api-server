@@ -38,12 +38,12 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn clean install --file pom.xml
       # run: mvn -B package --file pom.xml -DskipTests
 
-    - name: make target directory
+    - name: copy
       # run: mkdir target && cp target/*.jar target
-      run: pwd
+      run: cp ${{ github.workspace }}/target .
 
   build_image:
     runs-on: ubuntu-latest
