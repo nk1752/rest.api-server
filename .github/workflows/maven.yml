@@ -51,11 +51,10 @@ jobs:
     needs: [build_jar]
 
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Azure Login
-        uses: azure/login@1.4.6
+      - uses: azure/login@1.4.3
+        name: Azure Login
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
