@@ -36,7 +36,7 @@ EXPOSE 8080
 # LABEL build=$build
 # LABEL date=$date
 
-ARG JAR_FILE=target/rest.api-server-0.0.1-SHAPSHOT.jar
+ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} restapiserver.jar
 # ENTRYPOINT ["java","-jar","/nk-poc.jar"]
 ENTRYPOINT exec java -jar /restapiserver.jar

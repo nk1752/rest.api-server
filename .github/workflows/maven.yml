@@ -11,9 +11,22 @@ name: Java CI with Maven
 on:
   workflow_dispatch:
 
-jobs:
-  build:
+env:
+  ACR_RESOURCE_GROUP: cluster-dev-rg
+  AZURE_CONTAINER_REGISTRY: vhacr1
+  CLUSTER_NAME: cluster-dev
+  CLUSTER_RESOURCE_GROUP: cluster-dev-rg
+  CONTAINER_NAME: restapiserver
+  NAMESPCE: rest-api-namespace
+  DEPLOYMENT_MANIFEST_PATH: | 
+    ./manifest/api-basic-ingress.yml
+    ./manifest/api-deployment.yml
+    ./manifest/api-service.yml
 
+
+jobs:
+
+  build_jar:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,4 +39,33 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      # run: mvn -B package --file pom.xml -DskipTests
+
+  build_image:
+    runs-on: ubuntu-latest
+
+    permissions:
+            contents: read
+            id-token: write
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@1.4.3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+
+      - name: build and push image to ACR
+        run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
+
+      
+      - run: pwd
+      - run: ls
+        
+          
+
 
