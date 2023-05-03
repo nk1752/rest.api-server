@@ -38,4 +38,4 @@ jobs:
 
     - name: root directory list
       
-      run: echo "workspace -> ${{ github_workspace }}"
+      run: echo "workspace -> ${{ github.workspace }}"
