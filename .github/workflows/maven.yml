@@ -43,7 +43,7 @@ jobs:
 
     - name: copy
       # run: mkdir target && cp target/*.jar target
-      run: cp  ${{ github.workspace }}/target/rest-api-server.jar /target/rest-api-server.jar
+      run: cp  ${{ github.workspace }}/target/rest-api-server-0.0.1.jar /target/rest-api-server.jar
       # run: cd target && ls
 
   build_image:
