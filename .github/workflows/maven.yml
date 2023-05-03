@@ -46,6 +46,9 @@ jobs:
       # run: cp -R ${{ github.workspace }}/target/*.jar /target
     
     - name: root dir
+      run: pwd
+
+    - name: root dir list
       run: ls
 
     - name: target dir
@@ -71,12 +74,7 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
 
       - name: build and push image to ACR
-        run: az acr build \
-              --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} \
-              --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
-              --build-arg jar=./target/rest-api-server.jar \
-              -g ${{ env.ACR_RESOURCE_GROUP }} \
-              -f ./Dockerfile .
+        run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} --build-arg JAR_FILE=./target/rest-api-server-0.0.1.jar -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile .
         
           
 
