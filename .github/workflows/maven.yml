@@ -43,7 +43,7 @@ jobs:
 
     - name: copy
       # run: mkdir target && cp target/*.jar target
-      run: cp ${{ github.workspace }}/target .
+      run: cp -R ${{ github.workspace }}/target .
 
   build_image:
     runs-on: ubuntu-latest
