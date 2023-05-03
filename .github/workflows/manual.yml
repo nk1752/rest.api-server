@@ -33,9 +33,9 @@ jobs:
       run: echo "Hello ${{ inputs.name }}"
 
     - name: root directory
-      shell: bash
+      
       run: pwd
 
     - name: root directory list
-      shell: bash
-      run: ls -a
+      
+      run: echo "workspace -> ${{ github_workspace }}"
