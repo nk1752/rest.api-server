@@ -10,9 +10,9 @@ on:
     inputs:
       name:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Nadeem'
+        description: 'Guest'
         # Default value if no value is explicitly provided
-        default: 'World'
+        default: 'Nadeem'
         # Input has to be provided for the workflow to run
         required: true
         # The data type of the input
@@ -28,7 +28,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: scr
+        working-directory: rest.api-server/scr
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
