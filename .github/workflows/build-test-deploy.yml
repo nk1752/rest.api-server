@@ -16,8 +16,10 @@ env:
   AZURE_CONTAINER_REGISTRY: vhacr1
   CLUSTER_NAME: cluster-dev
   CLUSTER_RESOURCE_GROUP: cluster-dev-rg
+  RESOURCE_GROUP: cluster-dev-rg
   CONTAINER_NAME: restapiserver
   NAMESPCE: rest-api-namespace
+  DEV_TAG: latest
   DEPLOYMENT_MANIFEST_PATH: | 
     ./manifest/api-basic-ingress.yml
     ./manifest/api-deployment.yml
@@ -69,7 +71,7 @@ jobs:
         --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
         --build-arg JAR_FILE=./target/rest-api-server-0.0.1.jar \
         -g ${{ env.ACR_RESOURCE_GROUP }} \
-        -f ./dockerfiles/Dockerfile.dev .
+        -f ./dockerfile/Dockerfile.dev .
 
 
   deploy_manifest:
@@ -105,7 +107,7 @@ jobs:
         action: deploy
         manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
         images: |
-          ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+          ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ env.DEV_TAG }}
 
   
         
