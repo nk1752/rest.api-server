@@ -103,13 +103,25 @@ jobs:
         admin: 'false'
         use-kubelogin: 'true'
 
+    - name: root dir
+      run: pwd
+
+    - name: root dir list
+      run: ls
+
+    - name: target dir
+      run: cd target && ls
+
       # Deploys application based on given manifest file
     - name: Deploys application
       uses: Azure/k8s-deploy@v4
       with:
         action: deploy
         namespace: ${{ env.NAMESPACE }}
-        manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+        manifests: |
+          manifest/api-deployment.yml
+          manifest/api-service.yml
+          manifest/api-ingress.yml
         images: |
           ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ env.DEV_TAG }}
 
