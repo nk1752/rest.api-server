@@ -79,6 +79,8 @@ jobs:
             contents: read
             id-token: write
 
+    needs: [build_push_image]
+
     steps:
     - name: Azure Login
       uses: azure/login@v1.4.6
