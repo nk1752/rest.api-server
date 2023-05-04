@@ -64,8 +64,7 @@ jobs:
     - name: build and push image to ACR
       run: |
         az acr build \
-        --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} \
-        --tag ${{ env.DEV_TAG }}
+        --image ${{ env.CONTAINER_NAME }}:${{ env.DEV_TAG }} \
         --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
         --build-arg JAR_FILE=./target/rest-api-server-0.0.1.jar \
         -g ${{ env.ACR_RESOURCE_GROUP }} \
