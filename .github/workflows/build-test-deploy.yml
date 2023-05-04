@@ -69,7 +69,7 @@ jobs:
         --registry ${{ env.AZURE_CONTAINER_REGISTRY }}
         --build-arg JAR_FILE=./target/rest-api-server-0.0.1.jar
         -g ${{ env.ACR_RESOURCE_GROUP }}
-        -f ./Dockerfile .
+        -f ./dockerfiles/Dockerfile.dev .
 
 
   deploy_manifest:

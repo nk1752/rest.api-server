@@ -1,0 +1,21 @@
+FROM openjdk:17-alpine
+
+# set timezone in docker container
+ENV TZ=America/Chicago
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN addgroup -S viva && adduser -S devops -G viva
+USER devops
+
+EXPOSE 8080
+
+ARG JAR_FILE
+
+RUN ls
+
+RUN echo jar file: ${JAR_FILE}
+
+COPY ${JAR_FILE} rest-api-server.jar
+
+# ENTRYPOINT ["java","-jar","/nk-poc.jar"]
+ENTRYPOINT exec java -jar /rest-api-server.jar
