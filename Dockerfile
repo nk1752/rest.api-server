@@ -43,7 +43,7 @@ RUN ls
 # ARG JAR_FILE=target/*.jar
 RUN echo jar file: ${JAR_FILE}
 
-# COPY ${JAR_FILE} rest-api-server.jar
+COPY ${JAR_FILE} rest-api-server.jar
 
 # ENTRYPOINT ["java","-jar","/nk-poc.jar"]
 ENTRYPOINT exec java -jar /rest-api-server-0.0.1.jar
