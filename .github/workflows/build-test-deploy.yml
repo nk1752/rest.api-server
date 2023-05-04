@@ -18,12 +18,9 @@ env:
   CLUSTER_RESOURCE_GROUP: cluster-dev-rg
   RESOURCE_GROUP: cluster-dev-rg
   CONTAINER_NAME: restapiserver
-  NAMESPCE: rest-api-namespace
+  NAMESPACE: rest-api-namespace
   DEV_TAG: latest
-  DEPLOYMENT_MANIFEST_PATH: | 
-    ./manifest/api-basic-ingress.yml
-    ./manifest/api-deployment.yml
-    ./manifest/api-service.yml
+  DEPLOYMENT_MANIFEST_PATH: manifest
 
 
 jobs:
@@ -68,6 +65,7 @@ jobs:
       run: |
         az acr build \
         --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} \
+        --tag ${{ env.DEV_TAG }}
         --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
         --build-arg JAR_FILE=./target/rest-api-server-0.0.1.jar \
         -g ${{ env.ACR_RESOURCE_GROUP }} \
@@ -111,6 +109,7 @@ jobs:
       uses: Azure/k8s-deploy@v4
       with:
         action: deploy
+        namespace: ${{ env.NAMESPACE }}
         manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
         images: |
           ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ env.DEV_TAG }}
