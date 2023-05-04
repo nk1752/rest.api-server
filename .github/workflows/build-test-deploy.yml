@@ -92,12 +92,6 @@ jobs:
     - name: checkout
       uses: actions/checkout@v3
 
-      # Use kubelogin to configure your kubeconfig for Azure auth
-    - name: Set up kubelogin for non-interactive login
-      uses: azure/use-kubelogin@v1
-      with:
-        kubelogin-version: 'v0.0.24'
-        skip-cache: 'true'
 
       # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
     - name: Get K8s context
@@ -105,8 +99,15 @@ jobs:
       with:
         resource-group: ${{ env.RESOURCE_GROUP }}
         cluster-name: ${{ env.CLUSTER_NAME }}
-        admin: 'true'
+        admin: 'false'
         use-kubelogin: 'true'
+
+        # Use kubelogin to configure your kubeconfig for Azure auth
+    - name: Set up kubelogin for non-interactive login
+      uses: azure/use-kubelogin@v1
+      with:
+        kubelogin-version: 'v0.0.24'
+        skip-cache: 'true'
 
       # Deploys application based on given manifest file
     - name: Deploys application
