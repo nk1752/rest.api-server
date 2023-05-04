@@ -27,4 +27,4 @@ spec:
               cpu: "1000m"
         ports:
         - containerPort: 8080
-          name: restapiserver-port
+          
