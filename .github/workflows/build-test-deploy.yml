@@ -29,6 +29,10 @@ jobs:
   build_deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+            contents: read
+            id-token: write
+
     steps:
     - name: Azure Login
       uses: azure/login@v1.4.6
