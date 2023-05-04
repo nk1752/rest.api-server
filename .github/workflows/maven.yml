@@ -50,9 +50,9 @@ jobs:
     - name: target dir
       run: cd target && ls
 
-    - name: copy
+    # - name: copy
       # run: mkdir target && cp target/*.jar target
-      run: mv ${{ github.workspace }}/target/rest-api-server-0.0.1.jar ./target
+      # run: mv ${{ github.workspace }}/target/rest-api-server-0.0.1.jar ./target
 
   build_image:
     runs-on: ubuntu-latest
