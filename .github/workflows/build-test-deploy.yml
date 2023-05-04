@@ -1,0 +1,66 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: build with Maven
+
+on:
+  workflow_dispatch:
+
+env:
+  ACR_RESOURCE_GROUP: cluster-dev-rg
+  AZURE_CONTAINER_REGISTRY: vhacr1
+  CLUSTER_NAME: cluster-dev
+  CLUSTER_RESOURCE_GROUP: cluster-dev-rg
+  CONTAINER_NAME: restapiserver
+  NAMESPCE: rest-api-namespace
+  DEPLOYMENT_MANIFEST_PATH: | 
+    ./manifest/api-basic-ingress.yml
+    ./manifest/api-deployment.yml
+    ./manifest/api-service.yml
+
+
+jobs:
+
+  build_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Azure Login
+      uses: azure/login@v1.4.6
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }} 
+    
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn clean install --file pom.xml
+      # run: mvn -B package --file pom.xml -DskipTests
+  
+    - name: root dir
+      run: pwd
+
+    - name: root dir list
+      run: ls
+
+    - name: target dir
+      run: cd target && ls
+
+
+    - name: build and push image to ACR
+      run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} --build-arg JAR_FILE=./target/rest-api-server-0.0.1.jar -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile .
+        
+          
+
+
