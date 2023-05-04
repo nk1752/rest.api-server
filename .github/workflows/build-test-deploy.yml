@@ -116,8 +116,10 @@ jobs:
     - name: Deploys application
       uses: Azure/k8s-deploy@v4
       with:
-        action: deploy
+        resource-group: ${{ env.RESOURCE_GROUP }}
         namespace: ${{ env.NAMESPACE }}
+        action: deploy
+        strategy: basic
         manifests: |
           manifest/api-deployment.yml
           manifest/api-service.yml
