@@ -68,7 +68,7 @@ jobs:
         --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
         --build-arg JAR_FILE=./target/${{ env.CONTAINER_NAME }}-0.0.1.jar \
         -g ${{ env.ACR_RESOURCE_GROUP }} \
-        -f ./Dockerfile.dev .
+        -f ./dockerfiles/Dockerfile.dev .
 
 
   deploy_manifest:
