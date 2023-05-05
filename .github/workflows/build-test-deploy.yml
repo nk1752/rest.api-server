@@ -66,9 +66,9 @@ jobs:
         az acr build \
         --image ${{ env.CONTAINER_NAME }}:${{ env.DEV_TAG }} \
         --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
-        --build-arg JAR_FILE=./target/rest-api-server-0.0.1.jar \
+        --build-arg JAR_FILE=./target/${{ env.CONTAINER_NAME }}-0.0.1.jar \
         -g ${{ env.ACR_RESOURCE_GROUP }} \
-        -f ./dockerfile/Dockerfile.dev .
+        -f ./Dockerfile.dev .
 
 
   deploy_manifest:
