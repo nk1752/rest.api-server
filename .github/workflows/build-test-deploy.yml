@@ -120,6 +120,9 @@ jobs:
         strategy: basic
         manifests: |
           manifest/api-deployment.yml
+          manifest/api-service.yml
+          manifest/api-ingress.yml
+          
           
         images: |
           ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ env.DEV_TAG }}
