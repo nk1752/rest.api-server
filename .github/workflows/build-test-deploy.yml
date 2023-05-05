@@ -17,7 +17,7 @@ env:
   CLUSTER_NAME: cluster-dev
   CLUSTER_RESOURCE_GROUP: cluster-dev-rg
   RESOURCE_GROUP: cluster-dev-rg
-  CONTAINER_NAME: restapiserver
+  CONTAINER_NAME: rest-api-server
   NAMESPACE: rest-api-namespace
   DEV_TAG: latest
   DEPLOYMENT_MANIFEST_PATH: manifest
