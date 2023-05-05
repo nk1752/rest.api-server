@@ -10,6 +10,9 @@ USER devops
 EXPOSE 8080
 
 ARG JAR_FILE
+ARG ENV
+
+ENV nk=${ENV}
 
 RUN ls
 
