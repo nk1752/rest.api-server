@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: restapiserver
-        image: vhacr1.azurecr.io/restapiserver:latest
+        image: vhacr1.azurecr.io/rest-api-server:v1
         resources:
           requests:
             memory: "128Mi"

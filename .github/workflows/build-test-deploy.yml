@@ -18,8 +18,8 @@ env:
   CLUSTER_RESOURCE_GROUP: cluster-dev-rg
   RESOURCE_GROUP: cluster-dev-rg
   CONTAINER_NAME: rest-api-server
+  CONTAINER_TAG: v1
   NAMESPACE: rest-api-namespace
-  DEV_TAG: latest
   DEPLOYMENT_MANIFEST_PATH: manifest
 
 
@@ -64,7 +64,7 @@ jobs:
     - name: build and push image to ACR
       run: |
         az acr build \
-        --image ${{ env.CONTAINER_NAME }}:${{ env.DEV_TAG }} \
+        --image ${{ env.CONTAINER_NAME }}:${{ env.CONTAINER_TAG }} \
         --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
         --build-arg JAR_FILE=./target/${{ env.CONTAINER_NAME }}-0.0.1.jar \
         -g ${{ env.ACR_RESOURCE_GROUP }} \
@@ -123,9 +123,8 @@ jobs:
           manifest/api-service.yml
           manifest/api-ingress.yml
           
-          
         images: |
-          ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ env.DEV_TAG }}
+          ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ env.CONTAINER_TAG }}
 
   
         
