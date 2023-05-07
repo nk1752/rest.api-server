@@ -18,7 +18,9 @@ env:
   CLUSTER_RESOURCE_GROUP: cluster-dev-rg
   RESOURCE_GROUP: cluster-dev-rg
   CONTAINER_NAME: rest-api-server
-  CONTAINER_TAG: v1
+  APP_NAME: rest-api-server
+  
+  CONTAINER_TAG: ${{ github.sha }}
   NAMESPACE: rest-api-namespace
   DEPLOYMENT_MANIFEST_PATH: manifest
   ENV: dev
@@ -121,10 +123,8 @@ jobs:
         action: deploy
         strategy: basic
         manifests: |
-          manifests/api-deployment.yml
           manifests/api-service.yml
-          manifests/api-ingress.yml
-          
+          manifests/api-deployment.yml 
         images: |
           ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ env.CONTAINER_TAG }}
 
