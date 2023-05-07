@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apiserver-deployment
-  namespace: rest-api-namespace
+  name: apiservice-deployment
+  namespace: poc-namespace
   labels:
-    app: restapiserver
+    app: restservice
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: restapiserver
+      app: restservice
   template:
     metadata:
       labels:
-        app: restapiserver
+        app: restservice
     spec:
       containers:
-      - name: restapiserver
-        image: vhacr1.azurecr.io/rest-api-server:v1
+      - name: restservice
+        image: vhacr1.azurecr.io/restservice:latest
         resources:
           requests:
             memory: "128Mi"
