@@ -21,7 +21,7 @@ env:
   APP_NAME: rest-api-server
   
   CONTAINER_TAG: ${{ github.sha }}
-  NAMESPACE: poc-namespace
+  NAMESPACE: default
   DEPLOYMENT_MANIFEST_PATH: manifest
   ENV: dev
 
