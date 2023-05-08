@@ -1,23 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
-  name: apiservice-deployment
-  namespace: default
+  name: data-service-deployment
+  namespace: poc
   labels:
-    app: restservice
+    app: data
+
 spec:
   replicas: 2
+  
+  # requirement of spec
   selector:
     matchLabels:
-      app: restservice
+      app: data
+  
+  # requirement of spec
   template:
     metadata:
       labels:
-        app: restservice
+        app: data
     spec:
       containers:
-      - name: restservice
-        image: vhacr1.azurecr.io/restservice:latest
+      
+      - name: oauth2rs
+        image: vhacr2.azurecr.io/oauth2rs:latest
+        
         resources:
           requests:
             memory: "128Mi"
@@ -25,6 +33,7 @@ spec:
           limits:
               memory: "256Mi"
               cpu: "1000m"
+        
         ports:
         - containerPort: 8080
           
