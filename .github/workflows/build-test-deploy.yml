@@ -14,7 +14,7 @@ on:
 env:
   AZURE_CONTAINER_REGISTRY: vhacr2
   CLUSTER_NAME: cluster-poc
-  RESOURCE_GROUP: cluster-dev-rg
+  RESOURCE_GROUP: cluster-poc-rg
   CONTAINER_NAME: oauth2rs
   APP_NAME: oauth2rs
   
