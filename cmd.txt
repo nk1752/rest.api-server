@@ -1,3 +1,0 @@
-az aks get-credentials --name MyManagedCluster --resource-group MyResourceGroup
-
-kubectl get pods -A -o wide

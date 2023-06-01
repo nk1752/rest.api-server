@@ -17,11 +17,12 @@ env:
   RESOURCE_GROUP: cluster-poc-rg
   CONTAINER_NAME: oauth2rs
   APP_NAME: oauth2rs
+  JAR_FILE_NAME: restservice
   
   CONTAINER_TAG: ${{ github.sha }}
   NAMESPACE: poc
   DEPLOYMENT_MANIFEST_PATH: manifest
-  ENV: dev
+  ENV: prod
 
 
 jobs:
@@ -67,7 +68,7 @@ jobs:
         az acr build \
         --image ${{ env.CONTAINER_NAME }}:${{ env.CONTAINER_TAG }} \
         --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
-        --build-arg JAR_FILE=./target/${{ env.CONTAINER_NAME }}-0.0.1.jar \
+        --build-arg JAR_FILE=./target/${{ env.JAR_FILE_NAME }}-0.1.0.jar \
         --build-arg ENV=${{ env.ENV }} \
         -g ${{ env.RESOURCE_GROUP }} \
         -f ./dockerfiles/Dockerfile.dev .
