@@ -2,6 +2,7 @@ package poc.rest.apiserver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import poc.rest.apiserver.entity.User;
 import poc.rest.apiserver.repository.UserRepository;
 

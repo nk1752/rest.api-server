@@ -19,17 +19,18 @@ public class SecurityConfig {
                 .requestMatchers("/health", "/status").permitAll()
                 .requestMatchers("/api/**").authenticated()
                 
-                .anyRequest().authenticated()
+                //.anyRequest().authenticated()
 
                 
                  )
                 
                 
-            .csrf().disable()
+            //.csrf().disable()
             .httpBasic();    
 
         http
-            .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+        .oauth2ResourceServer()
+        .jwt();
             
             
         return http.build();

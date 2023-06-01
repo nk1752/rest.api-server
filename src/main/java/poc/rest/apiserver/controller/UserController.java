@@ -20,8 +20,21 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/health")
-    public String sayHello() {
-        return "Resource Server up and running";
+    public String healthCheck() {
+
+        String str = ">>>>>>>>> Health Check >>>>>>>>>";
+        System.out.println(str);
+        
+        return "REST API Server is up and running";
+    }
+    
+    @RequestMapping("/status")
+    public String statusCheck() {
+
+        String str = ">>>>>>>>> Status Check >>>>>>>>>";
+        System.out.println(str);
+        
+        return "REST API Server is up and running.  This endpoint is not protected.";
     }
 
     @RequestMapping(
@@ -42,7 +55,7 @@ public class UserController {
         params = {"id"})
     public User getUserById(@RequestParam Long id) {
 
-        String str = "Testing..." + Long.toString(id);
+        String str = ">>>>>>>>> Testing id >>>>>>>>> " + Long.toString(id);
         System.out.println(str);
   
         return userService.getUserById(id);
@@ -55,7 +68,7 @@ public class UserController {
     public List<User> getUserByIdBetween(@RequestParam Long id1, @RequestParam Long id2) {
 
         
-        String str = "Test ids => " + Long.toString(id1) + " " + Long.toString(id2);
+        String str =  ">>>>>>>>> Testing ids >>>>>>>>> " + Long.toString(id1) + " " + Long.toString(id2);
         System.out.println(str);
   
         return userService.getUserByIdBetween(id1, id2);
@@ -64,37 +77,37 @@ public class UserController {
     @RequestMapping(
         value = "/api/user",
         method = RequestMethod.GET,
-        params = {"lastName"})
-    public List<User> getUserByLastName(@RequestParam String lastName) {
+        params = {"lastname"})
+    public List<User> getUserByLastName(@RequestParam String lastname) {
 
-        String str = "Testing => last name = " + lastName;
+        String str = ">>>>>>>>> Testing lastname >>>>>>>>> " + lastname;
         System.out.println(str);
   
-        return userService.getUserByLastName(lastName);
+        return userService.getUserByLastName(lastname);
     }
 
     @RequestMapping(
         value = "/api/user",
         method = RequestMethod.GET,
-        params = {"firstName"})
-    public List<User> getUserByFirstName(@RequestParam String firstName) {
+        params = {"firstname"})
+    public List<User> getUserByFirstName(@RequestParam String firstname) {
 
-        String str = "Testing => first name = " + firstName;
+        String str = ">>>>>>>>> Testing firstname >>>>>>>>> " + firstname;
         System.out.println(str);
   
-        return userService.getUserByFirstName(firstName);
+        return userService.getUserByFirstName(firstname);
     }
 
     @RequestMapping(
         value = "/api/user",
         method = RequestMethod.GET,
-        params = {"lastName", "firstName"})
-    public List<User> getUserByLastNameAndFirstName(@RequestParam String lastName, @RequestParam String firstName) {
+        params = {"lastname", "firstname"})
+    public List<User> getUserByLastNameAndFirstName(@RequestParam String lastname, @RequestParam String firstname) {
 
-        String str = "Testing => full name = " + firstName + " " + lastName;
+        String str = "Testing => full name = " + firstname + " " + lastname;
         System.out.println(str);
   
-        return userService.getUserByLastNameAndFirstName(lastName, firstName);
+        return userService.getUserByLastNameAndFirstName(lastname, firstname);
     }
 
     @RequestMapping(method=RequestMethod.POST, value="/api/user")
@@ -102,7 +115,7 @@ public class UserController {
 
         //Customer customer = new Customer(id, firstName, lastName, accountId);
 
-        String str = "Testing...  full name";
+        String str = ">>>>>>>>> Testing POST >>>>>>>>> " + user.toString();
         System.out.println(str);
 
         userService.addUser(user);
