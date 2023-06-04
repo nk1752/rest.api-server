@@ -17,7 +17,7 @@ env:
   RESOURCE_GROUP: cluster-poc-rg
   CONTAINER_NAME: oauth2rs
   APP_NAME: oauth2rs
-  JAR_FILE_NAME: restservice
+  JAR_FILE_NAME: rest.api.service
   
   CONTAINER_TAG: ${{ github.sha }}
   NAMESPACE: poc

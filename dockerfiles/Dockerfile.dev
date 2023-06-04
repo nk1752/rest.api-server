@@ -16,7 +16,7 @@ ENV nk=${ENV}
 
 RUN ls
 
-RUN echo jar file: ${JAR_FILE}
+CMD [ "echo, jarfile: ${JAR_FILE}" ]
 
 COPY ${JAR_FILE} rest-api-server.jar
 
